@@ -22,6 +22,15 @@ class Main extends PluginBase implements Listener{
   }
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
     if($cmd->getName() == "biome"){
+      if($sender->isOp()){
+        if($args[0]=="ICE_PLAINS"){
+          $sender->getLevel()->loadChunk($sender->getFloorX, $sender->getFloorZ);
+          $level = $sender->getLevel();
+          $x = $sender->getX();
+          $z = $sender->getZ();
+          $sender->getChunk()->setBiomeId($x, $z, BIOME::ICE_PLAINS);
+        }
+      }
 }
 }
 }
