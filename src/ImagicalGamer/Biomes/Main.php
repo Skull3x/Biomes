@@ -14,6 +14,8 @@ use pocketmine\level\generator\biome\Biome;
 #Command
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
+#Level
+use pocketmine\level\Level;
 class Main extends PluginBase implements Listener{
 
   public function onEnable(){
@@ -24,11 +26,12 @@ class Main extends PluginBase implements Listener{
     if($cmd->getName() == "biome"){
       if($sender->isOp()){
         if($args[0]=="ICE_PLAINS"){
-          $sender->getLevel()->loadChunk($sender->getFloorX, $sender->getFloorZ);
-          $level = $sender->getLevel();
+		  $biome = implode(" ", $args);
+		  $level = $sender->getLevel()->getName();
           $x = $sender->getX();
           $z = $sender->getZ();
-          $sender->getChunk()->setBiomeId($x, $z, BIOME::ICE_PLAINS);
+          $sender->getLevel()->getChunk($sender->getX() >> 4, $sender->getZ() >> 4)->setBiomeId($x, $z, BIOME::ICE_PLAINS);
+		  $sender->sendMessage(C::AQUA . "Your biome has been changed to " . $biome);
         }
       }
 }
