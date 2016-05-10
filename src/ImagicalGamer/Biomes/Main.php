@@ -28,9 +28,10 @@ class Main extends PluginBase implements Listener{
         if($args[0]=="ICE_PLAINS"){
 		  $biome = implode(" ", $args);
 		  $level = $sender->getLevel()->getName();
-          $x = $sender->getX();
-          $z = $sender->getZ();
-          $sender->getLevel()->getChunk($sender->getX() >> 4, $sender->getZ() >> 4)->setBiomeId($x, $z, BIOME::ICE_PLAINS);
+                  $x = $sender->getX() >> 4;
+                  $z = $sender->getZ() >> 4;
+                  $chunk = $sender->getLevel()->getChunk($sender->getX() >> 4, $sender->getZ() >> 4);
+                  $chunk->setBiomeId($x, $z, BIOME::ICE_PLAINS)
 		  $sender->sendMessage(C::AQUA . "Your biome has been changed to " . $biome);
         }
       }
